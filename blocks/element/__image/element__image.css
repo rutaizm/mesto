@@ -1,0 +1,7 @@
+.element__image {
+    width: 282px;
+    height: 282px;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    display: block;
+ }

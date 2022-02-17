@@ -1,0 +1,6 @@
+.elements {
+    max-width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
