@@ -1,5 +1,5 @@
 .profile {
-    width: 80%;
+    max-width: 880px;
     display: flex;
     margin: auto;
     justify-content: space-between;
