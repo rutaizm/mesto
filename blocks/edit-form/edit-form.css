@@ -1,0 +1,9 @@
+.edit-form {
+    width: 430px;
+    height: 330px;
+    background-color: white;
+    border-radius: 2.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}

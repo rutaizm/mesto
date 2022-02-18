@@ -1,0 +1,11 @@
+.pop-up {
+    width: 100%;
+    background-color: #000000;
+    /*opacity: 0.5;
+    overflow: hidden;
+    position: fixed;*/
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    flex-direction: row-reverse;
+}
