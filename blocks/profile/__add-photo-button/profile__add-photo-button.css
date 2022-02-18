@@ -14,3 +14,9 @@
     cursor: pointer;
     opacity: .6;
 }
+
+@media screen and (min-width:581px) and (max-width:879px) {
+    .profile__add-photo-button {
+        margin-bottom: 46px;
+    }
+}

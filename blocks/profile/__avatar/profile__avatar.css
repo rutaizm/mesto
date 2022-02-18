@@ -5,3 +5,10 @@
     padding-top: 40px;
     padding-bottom: 50px;
 }
+
+@media screen and (min-width:581px) and (max-width:879px) {
+    .profile__avatar {
+        padding-bottom: 25px;
+    }
+}
+

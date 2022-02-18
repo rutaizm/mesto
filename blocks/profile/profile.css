@@ -4,3 +4,27 @@
     margin: auto;
     justify-content: space-between;
 }
+
+@media screen and (min-width:880px) and (max-width:920px) {
+    .profile {
+        max-width: 770px;
+    }
+}
+
+@media screen and (min-width:581px) and (max-width:879px) {
+    .profile {
+        max-width: 580px;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .profile {
+        min-width: 280px;
+        justify-content: center; 
+        flex-wrap: nowrap;
+
+    }
+}

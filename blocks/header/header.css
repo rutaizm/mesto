@@ -5,3 +5,17 @@
     margin: auto;
     border-bottom: solid 1px #545454;
 }
+
+@media screen and (min-width:880px) and (max-width:920px) {
+    .header {
+        max-width: 770px;
+    }
+}
+
+@media screen and (min-width:320px) and (max-width:879px) {
+    .header {
+        max-width: 580px;
+        min-width: 320px;
+        min-height: 84px;
+    }
+}
