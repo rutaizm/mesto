@@ -20,3 +20,11 @@
         margin-bottom: 46px;
     }
 }
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .profile__add-photo-button {
+        width: 282px;
+        margin-bottom: 36px;
+        background-size: 16px;
+    }
+}
