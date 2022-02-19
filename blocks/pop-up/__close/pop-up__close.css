@@ -4,6 +4,11 @@
     border-style: none;
     background-image: url(../../../images/icon.png);
     background-color: black;
+    position: absolute;
+    top: -40px;
+    right: 270px;
+
+
 }
 
 .pop-up__close:hover {

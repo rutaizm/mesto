@@ -8,4 +8,5 @@
     margin: auto;
     justify-content: center;
     flex-direction: row-reverse;
+    position: relative;
 }
