@@ -3,3 +3,9 @@
     border: none;
     padding: 0;
 }
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .edit-form__area {
+        margin: 24px 22px 0 22px;
+    }
+}

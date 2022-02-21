@@ -3,15 +3,21 @@
     height: 32px;
     border-style: none;
     background-image: url(../../../images/icon.png);
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     position: absolute;
-    top: -40px;
-    right: 270px;
-
-
+    top: 208px;
+    right: -40px;
 }
 
 .pop-up__close:hover {
     opacity: 0.6;
     cursor: pointer;
+}
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .pop-up__close{
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    }
 }

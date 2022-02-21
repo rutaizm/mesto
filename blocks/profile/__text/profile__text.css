@@ -2,12 +2,14 @@
     padding-bottom: 62px;
     padding-left: 28px;
     padding-right: 18px;
+    padding-top: 62px;
 }
 
 
 @media screen and (min-width:581px) and (max-width:879px) {
     .profile__text {
         padding-bottom: 25px;
+        
     }
 }
 
@@ -15,5 +17,6 @@
     .profile__text {
          padding-bottom: 36px;
          text-align: center;
+         padding-top: 0;
     }
 }
