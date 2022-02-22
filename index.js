@@ -9,8 +9,8 @@ let job = document.querySelector('.profile__info');
 
 function openPopup() {
     popup.classList.remove("pop-up__hidden");
-     nameInput.value = names.textContent;
-     jobInput.value = job.textContent;
+    nameInput.value = names.textContent;
+    jobInput.value = job.textContent;  
 }
 
 function closePopup () {
@@ -19,3 +19,12 @@ function closePopup () {
 
 editProfile.addEventListener("click", openPopup);
 closeBtn.addEventListener("click", closePopup);
+
+function formSubmitHandler (evt) {
+    evt.preventDefault();
+    nameInput = nameInput.value;
+    jobInput = jobInput.value;
+    names.textContent = nameInput;
+    job.textContent = jobInput;
+}
+formElement.addEventListener('submit', formSubmitHandler); 
