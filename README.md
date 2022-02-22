@@ -18,3 +18,8 @@
 * File Structure and File Paths (Nested BEM)
 * Git
 * JavaScript
+
+
+Ссылка на проект:
+
+https://rutaizm.github.io/mesto/index.html
