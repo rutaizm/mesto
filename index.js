@@ -8,13 +8,13 @@ let names = document.querySelector('.profile__name');
 let job = document.querySelector('.profile__info');
 
 function openPopup() {
-    popup.classList.remove("pop-up__hidden");
+    popup.classList.remove("hidden");
     nameInput.value = names.textContent;
     jobInput.value = job.textContent;  
 }
 
 function closePopup () {
-    popup.classList.add("pop-up__hidden");
+    popup.classList.add("hidden");
 }
 
 editProfile.addEventListener("click", openPopup);
