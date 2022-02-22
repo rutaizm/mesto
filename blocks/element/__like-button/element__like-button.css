@@ -7,3 +7,12 @@
     background-position: center;
     background-color: white;
 }
+
+.element__like-button:hover {
+    opacity: .5;
+    cursor: pointer;
+}
+
+.element__like-button:active {
+    background-image: url(../../../images/like-button-active.png);
+}
