@@ -4,10 +4,11 @@
     align-self: center;
     background-color: black;
     border: 1px solid white;
-    background-image: url(../../../images/add-photo.png);
+    background-image: url(../../../images/add-photo-button.svg);
     background-repeat: no-repeat;
     background-size: 22px;
     background-position: center;
+    transition: opacity 0.4s ease-out;
 }
 
 .profile__add-photo-button:hover {

@@ -11,77 +11,80 @@
     <header class="header">
         <img class="logo" src="./images/logo.svg" alt="логотип в шапке">
     </header>
-    <section class="profile">
-        <div class="profile__container">
-            <img class="profile__avatar" src="./images/kusto.jpg" alt="Жак-Ив Кусто">
+    <main class="content">
+        <section class="profile">
+            <div class="profile__container">
+                <img class="profile__avatar" src="./images/kusto.jpg" alt="Жак-Ив Кусто">
                 <div class="profile__bio"> 
                     <div class="profile__text">
-                        <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button"></button>
+                        <h1 class="profile__name">Жак-Ив Кусто</h1>
+                        <button class="profile__edit-button" type="button"></button>
                     </div>
                     <p class="profile__info">Исследователь океана</p>
                 </div>
-        </div>
-        <button class="profile__add-photo-button"></button>
-    </section>
-    <section class="elements" aria-label="Фотографии пользователя">
-        <ul class="elements__photoes">
-            <li class="element">
-                <img class="element__image" src="./images/church.jpg" alt="Каменная церковь">
-                <div class="element__item">
-                    <p class="element__title">Карачаевск</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-            <li class="element">
-                <img class="element__image" src="./images/sunset.png" alt="Закат в долине">
-                <div class="element__item">
-                    <p class="element__title">Гора Эльбрус</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-            <li class="element">
-                <img class="element__image" src="./images/mountain.png" alt="Горные вершины">
-                <div class="element__item">
-                    <p class="element__title">Домбай</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-            <li class="element">
-                <img class="element__image" src="./images/sunset-1.png" alt="Еще закат в долине">
-                <div class="element__item">
-                    <p class="element__title">Гора Эльбрус</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-            <li class="element">
-                <img class="element__image" src="./images/mountain-1.png" alt="Лес и горы">
-                <div class="element__item">
-                    <p class="element__title">Домбай</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-            <li class="element">
-                <img class="element__image" src="./images/church-1.png" alt="Старинная каменная церковь">
-                <div class="element__item">
-                    <p class="element__title">Карачаево-Черкессия</p>
-                    <button class="element__like-button"></button>
-                </div>
-            </li>
-        </ul>
-    </section>
+            </div>
+            <button class="profile__add-photo-button" type="button"></button>
+        </section>
+        <section class="elements" aria-label="Фотографии пользователя">
+         <ul class="elements__photoes">
+                <li class="element">
+                    <img class="element__image" src="./images/church.jpg" alt="Каменная церковь">
+                    <div class="element__item">
+                        <p class="element__title">Карачаевск</p>
+                        <button class="element__like-button"></button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./images/sunset.png" alt="Закат в долине">
+                    <div class="element__item">
+                        <p class="element__title">Гора Эльбрус</p>
+                        <button class="element__like-button"></button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./images/mountain.png" alt="Горные вершины">
+                    <div class="element__item">
+                        <p class="element__title">Домбай</p>
+                        <button class="element__like-button"></button>
+                   </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./images/sunset-1.png" alt="Еще закат в долине">
+                    <div class="element__item">
+                        <p class="element__title">Гора Эльбрус</p>
+                        <button class="element__like-button"></button>
+                    </div>
+                </li>
+                <li class="element">
+                   <img class="element__image" src="./images/mountain-1.png" alt="Лес и горы">
+                    <div class="element__item">
+                        <p class="element__title">Домбай</p>
+                        <button class="element__like-button"></button>
+                    </div>
+                </li>
+                <li class="element">
+                    <img class="element__image" src="./images/church-1.png" alt="Старинная каменная церковь">
+                    <div class="element__item">
+                        <p class="element__title">Карачаево-Черкессия</p>
+                        <button class="element__like-button"></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
     <footer class="footer">
-        <div class="footer__copyright">© 2020 Mesto Russia</div>
+        <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
     <div class="pop-up hidden">
         <div class="pop-up__container">        
-            <form class="edit-form">
-                <button class="pop-up__close"></button>
+            <form class="edit-form" name="profileEditForm">
+                <button class="pop-up__close" type="button"></button>
                 <h2 class="edit-form__title">Редактировать профиль</h2>
                 <fieldset class="edit-form__area">
-                    <input type="text" class="edit-form__field edit-form__name">
-                    <input type="text" class="edit-form__field edit-form__info">
+                    <input type="text" name="name" placeholder="Имя" class="edit-form__field edit-form__name">
+                    <input type="text" name="job" placeholder="Подпись" class="edit-form__field edit-form__info">
                 </fieldset>
-                <button class="pop-up__save">Сохранить</button>
+                <button class="pop-up__save" type="submit">Сохранить</button>
             </form>
         </div>
     </div>
