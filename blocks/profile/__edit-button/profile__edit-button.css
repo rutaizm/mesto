@@ -11,6 +11,7 @@
     display: inline-flex;
     transition: opacity 0.4s ease-out;
     border-radius: 1px;
+    align-self: center;
 }
 
 .profile__edit-button:hover {
