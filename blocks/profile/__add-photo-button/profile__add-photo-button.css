@@ -17,14 +17,14 @@
 
 @media screen and (min-width:581px) and (max-width:879px) {
     .profile__add-photo-button {
-        margin-bottom: 46px;
+        margin-bottom: 20px;
     }
 }
 
 @media screen and (min-width:320px) and (max-width:580px) {
     .profile__add-photo-button {
         width: 282px;
-        margin-bottom: 36px;
+        margin-bottom: 16px;
         background-size: 16px;
     }
 }

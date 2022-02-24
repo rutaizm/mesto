@@ -4,21 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./index.css">
+    <link rel="stylesheet" href="./blocks/page/index.css">
     <title>Mesto</title>
 </head>
 <body class="page">
     <header class="header">
-        <img class="logo" src="./images/logo.png" alt="логотип в шапке">
+        <img class="logo" src="./images/logo.svg" alt="логотип в шапке">
     </header>
     <section class="profile">
         <div class="profile__container">
             <img class="profile__avatar" src="./images/kusto.jpg" alt="Жак-Ив Кусто">
-            <div class="profile__text">
-                <h1 class="profile__name">Жак-Ив Кусто<button class="profile__edit-button"></button></h1>
-                <p class="profile__info">Исследователь океана</p>
-            </div>
-             
+                <div class="profile__bio"> 
+                    <div class="profile__text">
+                        <h1 class="profile__name">Жак-Ив Кусто</h1><button class="profile__edit-button"></button>
+                    </div>
+                    <p class="profile__info">Исследователь океана</p>
+                </div>
         </div>
         <button class="profile__add-photo-button"></button>
     </section>
@@ -71,19 +72,19 @@
     <footer class="footer">
         <div class="footer__copyright">© 2020 Mesto Russia</div>
     </footer>
-<div class="pop-up hidden">
-    <div class="pop-up__container">        
-        <form class="edit-form">
-            <button class="pop-up__close"></button>
-            <h2 class="edit-form__title">Редактировать профиль</h2>
-            <fieldset class="edit-form__area">
-                <input type="text" class="edit-form__field edit-form__name">
-                <input type="text" class="edit-form__field edit-form__info">
-            </fieldset>
-            <button class="pop-up__save">Сохранить</button>
-        </form>
+    <div class="pop-up hidden">
+        <div class="pop-up__container">        
+            <form class="edit-form">
+                <button class="pop-up__close"></button>
+                <h2 class="edit-form__title">Редактировать профиль</h2>
+                <fieldset class="edit-form__area">
+                    <input type="text" class="edit-form__field edit-form__name">
+                    <input type="text" class="edit-form__field edit-form__info">
+                </fieldset>
+                <button class="pop-up__save">Сохранить</button>
+            </form>
+        </div>
     </div>
-</div>
-<script src="./index.js"></script>
+    <script src="./scripts/index.js"></script>
 </body>
 </html>
