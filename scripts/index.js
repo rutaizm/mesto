@@ -22,10 +22,13 @@ closeBtn.addEventListener("click", closePopup);
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
-    nameInput = nameInput.value;
-    jobInput = jobInput.value;
-    names.textContent = nameInput;
-    job.textContent = jobInput;
+
+    let nameInputValue = nameInput.value;
+    let jobInputValue = jobInput.value;
+
+    names.textContent = nameInputValue;
+    job.textContent = jobInputValue; 
+
     closePopup ();
 }
 formElement.addEventListener('submit', formSubmitHandler); 
