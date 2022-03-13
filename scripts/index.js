@@ -109,11 +109,13 @@ function renderPhoto (card) {
 function addCard (event) {
     event.preventDefault();
 
-    let placeInputValue = placeInput.value;
-    let linkInputValue = linkInput.value;
+    let newCard = {};
+    newCard.name = placeInput.value;
+    newCard.link = linkInput.value;
+    
+    renderPhoto(newCard);
 
-    photoItem.querySelector('.element__title').textContent = placeInput.value;
-    photoItem.querySelector('.element__image').src = linkInput.value;
+    photoList.append(newCard);
 
     closePopupAddPhoto ();
 }
