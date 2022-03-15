@@ -128,21 +128,20 @@ function addCard (event) {
 
 renderPhoto();
 
-function openImagePopup () {
-    bigPhotoPopup.classList.add('pop-up_opened');
-}
-
-
-const bigPhoto = document.querySelector('.element'); // слушатель картинки
+// попап с картинкой
+const bigPhoto = document.querySelector('.element'); 
 const imageText = document.querySelector('.element__title');
-const imagePhoto = document.querySelector('.element__image');
+const imagePhoto = document.querySelector('.element__image');// слушатель картинки
 const popupPhoto = document.querySelector('.image-popup');
 const popupImage = document.querySelector('.image-popup__item');
 const popupImageText = document.querySelector('.image-popup__caption');
 const popupClose = document.querySelector('.image-popup__close-button');
 
+function openImagePopup () {
+    bigPhotoPopup.classList.add('pop-up_opened');
+}
 
-bigPhoto.addEventListener('click', showBigPhoto); // повесили слушатель на картинку
+imagePhoto.addEventListener('click', showBigPhoto); // повесили слушатель на картинку
 popupClose.addEventListener('click', closePopup);
 
 function showBigPhoto(image) {
