@@ -16,7 +16,6 @@ const addPhotoForm = document.querySelector('.edit-form_type_photo');
 const photoList = document.querySelector('.elements__photoes'); 
 const editPopup = document.querySelector('.popup-edit');
 const addPhotoPopup = document.querySelector('.popup-photo');
-const bigPhotoPopup = document.querySelector('.image-popup');
 const initialCards = [
     {
       name: 'Архыз',
@@ -129,7 +128,8 @@ function addCard (event) {
 renderPhoto();
 
 // попап с картинкой
-const bigPhoto = document.querySelector('.element'); 
+const bigPhotoPopup = document.querySelector('.image-popup');
+const imageListItem = document.querySelector('.element'); 
 const imageText = document.querySelector('.element__title');
 const imagePhoto = document.querySelector('.element__image');// слушатель картинки
 const popupPhoto = document.querySelector('.image-popup');
