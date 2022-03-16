@@ -16,6 +16,14 @@ const addPhotoForm = document.querySelector('.edit-form_type_photo');
 const photoList = document.querySelector('.elements__photoes'); 
 const editPopup = document.querySelector('.popup-edit');
 const addPhotoPopup = document.querySelector('.popup-photo');
+const bigPhotoPopup = document.querySelector('.image-popup');
+const imageListItem = document.querySelector('.element'); 
+const imageText = document.querySelector('.element__title');
+const imagePhoto = document.querySelector('.element__image');// слушатель картинки
+const popupPhoto = document.querySelector('.image-popup');
+const popupImage = document.querySelector('.image-popup__item');
+const popupImageText = document.querySelector('.image-popup__caption');
+const popupClose = document.querySelector('.image-popup__close-button');
 const initialCards = [
     {
       name: 'Архыз',
@@ -68,8 +76,8 @@ function closePopup(event) {
 
 function editProfilePopup() {
     openPopup();
-    nameInput.value = names.textContent;
-    jobInput.value = job.textContent;
+        nameInput.value = names.textContent;
+        jobInput.value = job.textContent;
 }
 
 function formSubmitHandler (evt) {
@@ -91,23 +99,28 @@ function renderPhoto () {
 } 
 
 // создать карточку
+const photoTemplate = document.querySelector('.photo-template').content;
 function createCard (card) {
-    const photoTemplate = document.querySelector('.photo-template').content;
+    
     let newCard = photoTemplate.querySelector('.element').cloneNode(true);
 
-    newCard.querySelector('.element__title').textContent = card.name;
-    newCard.querySelector('.element__image').src = card.link;
-    newCard.querySelector('.element__image').alt = card.name;
-    
+    let newCardTitle = newCard.querySelector('.element__title');
+    let newCardImage = newCard.querySelector('.element__image');
+      
+    newCardTitle.textContent = card.name;
+    newCardImage.src = card.link;
+    newCardImage.alt = card.name;
+
     newCard.querySelector('.element__like-button').addEventListener('click', function(event){
         event.target.classList.toggle('element__like-button_active');
     })
 
     const deleteButton = newCard.querySelector('.element__delete-button');
-
     deleteButton.addEventListener('click', function(event) {
         photoList.removeChild(event.target.closest('.element'));
     });
+
+    newCardImage.addEventListener('click', () => showBigPhoto(newCardImage, newCardTitle));
 
     return newCard;
 }    
@@ -128,29 +141,17 @@ function addCard (event) {
 renderPhoto();
 
 // попап с картинкой
-const bigPhotoPopup = document.querySelector('.image-popup');
-const imageListItem = document.querySelector('.element'); 
-const imageText = document.querySelector('.element__title');
-const imagePhoto = document.querySelector('.element__image');// слушатель картинки
-const popupPhoto = document.querySelector('.image-popup');
-const popupImage = document.querySelector('.image-popup__item');
-const popupImageText = document.querySelector('.image-popup__caption');
-const popupClose = document.querySelector('.image-popup__close-button');
-
 function openImagePopup () {
     bigPhotoPopup.classList.add('pop-up_opened');
 }
 
-imagePhoto.addEventListener('click', showBigPhoto); // повесили слушатель на картинку
 popupClose.addEventListener('click', closePopup);
 
-function showBigPhoto(image) {
-    image.src = imagePhoto.src;
-    image.textContent = imageText.textContent;
-
+function showBigPhoto(image, title) {
+    openImagePopup(popupPhoto);
+  
     popupImage.src = image.src;
-    popupImageText.textContent = image.textContent;
+    popupImageText.textContent = title.textContent;
     popupImage.alt = image.textContent;
-
-    openImagePopup();
 }
+
