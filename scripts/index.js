@@ -1,26 +1,26 @@
 // переменные
-const popup = document.querySelector('.pop-up'); 
-const editProfile = document.querySelector('.profile__edit-button'); 
-const closeBtn = document.querySelector('.pop-up__close'); 
-const formElement = document.querySelector('.edit-form'); 
+const editPopup = document.querySelector('.popup-edit');
+const editProfile = document.querySelector('.profile__edit-button');
+const formElement = document.querySelector('.edit-form');
 const nameInput = formElement.querySelector('.edit-form__field_type_name');
 const jobInput = formElement.querySelector('.edit-form__field_type_info');
 const names = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__info');
 const editProfileSave = document.querySelector('.popup-edit__save-button');
-const addPhoto = document.querySelector('.popup-photo');
-const addPhotoBtn = document.querySelector('.profile__add-photo-button');
-const addPhotoCloseBtn = document.querySelector('.popup-photo__close');
+const closeEditPopup = document.querySelector('.popup-edit_close-button');
+
+const addPhotoPopup = document.querySelector('.popup-photo'); 
+const addPhotoBtn = document.querySelector('.profile__add-photo-button'); 
+const addPhotoForm = document.querySelector('.edit-form_type_photo');
+const addPhotoCloseBtn = document.querySelector('.popup-photo__close-button');
 const placeInput = document.querySelector('.edit-form__field_type_place');
 const linkInput = document.querySelector('.edit-form__field_type_link');
-const addPhotoForm = document.querySelector('.edit-form_type_photo');
-const photoList = document.querySelector('.elements__photoes'); 
-const editPopup = document.querySelector('.popup-edit');
-const addPhotoPopup = document.querySelector('.popup-photo');
+const addPhotoSaveBtn = document.querySelector('.popup-photo__save-button');
+const photoList = document.querySelector('.elements__photoes');
+
 const bigPhotoPopup = document.querySelector('.image-popup');
-const imageListItem = document.querySelector('.element'); 
 const imageText = document.querySelector('.element__title');
-const imagePhoto = document.querySelector('.element__image');// слушатель картинки
+const imagePhoto = document.querySelector('.element__image');
 const popupPhoto = document.querySelector('.image-popup');
 const popupImage = document.querySelector('.image-popup__item');
 const popupImageText = document.querySelector('.image-popup__caption');
@@ -52,39 +52,31 @@ const initialCards = [
     }
   ];
 
-  // обрабочики событий
-editProfile.addEventListener('click', openPopup);
-closeBtn.addEventListener('click', closePopup);
-addPhotoBtn.addEventListener('click', openPopup);
-addPhotoCloseBtn.addEventListener('click', closePopup);
+// поп-апы открыли
+function openPopup (data) {
+    data.classList.add('pop-up_opened');
+}
+
+editProfile.addEventListener('click', () => {
+    openPopup (editPopup);
+    nameInput.value = names.textContent;
+    jobInput.value = job.textContent;
+}); 
+
+addPhotoBtn.addEventListener('click', () => {
+    openPopup(addPhotoPopup);
+    addPhotoForm.reset();
+});
+
+// поп-апы закрыли
+function closePopup (data) {
+    data.classList.remove('pop-up_opened');
+}
+closeEditPopup.addEventListener('click', () => closePopup(editPopup));
+addPhotoCloseBtn.addEventListener('click', () => closePopup(addPhotoPopup));
+
+// редактирование формы о себе
 formElement.addEventListener('submit', formSubmitHandler);
-addPhotoForm.addEventListener('submit', addCard);
-editProfileSave.addEventListener('click', closePopup);
-
-// поп-апы
-function openPopup(event) {
-    if (event.target.classList.contains('profile__edit-button')) {
-        editPopup.classList.add('pop-up_opened');
-    } else if (event.target.classList.contains('profile__add-photo-button')) {
-        addPhotoPopup.classList.add('pop-up_opened');
-    } 
-}
-
-function closePopup(event) {
-    if (event.target.classList.contains('pop-up__close')) {
-        event.target.closest('.pop-up').classList.remove('pop-up_opened');
-    } 
-    else if (event.target.classList.contains('popup-edit__save-button')) {
-        event.target.closest('.pop-up').classList.remove('pop-up_opened');
-    } 
-}
-
-function editProfilePopup() {
-        nameInput.value = names.textContent;
-        jobInput.value = job.textContent;
-
-        openPopup();
-}
 
 function formSubmitHandler (evt) {
     evt.preventDefault();
@@ -95,7 +87,7 @@ function formSubmitHandler (evt) {
     names.textContent = nameInputValue;
     job.textContent = jobInputValue; 
 
-    closePopup();
+    closePopup(editPopup);
 }
  
 // распределить исходный массив
@@ -132,6 +124,8 @@ function createCard (card) {
 }    
 
 // добавить карточку
+addPhotoForm.addEventListener ('submit', addCard);
+
 function addCard (event) {
     event.preventDefault();
    
@@ -141,20 +135,17 @@ function addCard (event) {
     let newCards = createCard({ name: newCardsTitle, link: newCardsImage });
     photoList.prepend(newCards);
 
-    closePopup();
+    closePopup(addPhotoPopup);
 }
 
 renderPhoto();
 
 // попап с картинкой
-function openImagePopup () {
-    bigPhotoPopup.classList.add('pop-up_opened');
-}
-
-popupClose.addEventListener('click', closePopup);
+popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
+popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
 
 function showBigPhoto(image, title) {
-    openImagePopup(popupPhoto);
+    openPopup(bigPhotoPopup);
   
     popupImage.src = image.src;
     popupImageText.textContent = title.textContent;
