@@ -7,7 +7,7 @@ const jobInput = formProfilePopup.querySelector('.edit-form__field_type_info');
 const names = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__info');
 const profilePopupSaveBtn = document.querySelector('.popup-edit__save-button');
-const profilePopupCloseBtn = document.querySelector('.popup-edit_close-button');
+const profilePopupCloseBtn = document.querySelector('.popup-edit__close-button');
 
 const photoPopup = document.querySelector('.popup-photo'); 
 const photoPopupAddBtn = document.querySelector('.profile__add-photo-button'); 
