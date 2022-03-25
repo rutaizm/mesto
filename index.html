@@ -35,12 +35,14 @@
     </footer>
     <div class="pop-up popup-edit">
         <div class="pop-up__container">        
-            <form class="edit-form" name="profileEditForm">
+            <form class="edit-form" name="profileEditForm" novalidate>
                 <button class="pop-up__close popup-edit__close-button" type="button"></button>
                 <h2 class="edit-form__title">Редактировать профиль</h2>
                 <fieldset class="edit-form__area">
-                    <input type="text" name="name" placeholder="Имя" class="edit-form__field edit-form__field_type_name">
-                    <input type="text" name="job" placeholder="Подпись" class="edit-form__field edit-form__field_type_info">
+                    <input type="text" id="name-input" name="name" placeholder="Имя" class="edit-form__field edit-form__field_type_name" required minlength="2" maxlength="40">
+                    <span class="edit-form__input-error name-input-error"></span>
+                    <input type="text" id="job-input" name="job" placeholder="Подпись" class="edit-form__field edit-form__field_type_info" required minlength="2" maxlength="200">
+                    <span class="edit-form__input-error job-input-error"></span>
                 </fieldset>
                 <button class="pop-up__save popup-edit__save-button" type="submit">Сохранить</button>
             </form>

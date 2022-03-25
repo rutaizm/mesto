@@ -55,7 +55,9 @@ const initialCards = [
   
 // поп-апы открыли
 function openPopup (data) {
-    data.classList.add('pop-up_opened');
+  data.classList.add('pop-up_opened');
+  document.addEventListener('mousedown', closeOverlayClick);
+  document.addEventListener('keydown', closeEscPress);
 }
 
 editProfile.addEventListener('click', () => {
@@ -75,6 +77,21 @@ function closePopup (data) {
 }
 profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
+
+const closeOverlayClick = (evt) => {
+  const popupOpen = document.querySelector('.pop-up_opened');
+    if(evt.target === popupOpen){        
+      closePopup(popupOpen);
+    };
+}
+
+const closeEscPress = (evt) => {
+  const popupOpen = document.querySelector('.pop-up_opened');
+    if (evt.key === 'Escape' && popupOpen !== null) {
+      closePopup(popupOpen);
+    };
+}
+
 
 // редактирование формы о себе
 formProfilePopup.addEventListener('submit', formSubmitHandler);
@@ -153,3 +170,65 @@ function showBigPhoto(image, title) {
     popupImage.alt = title.textContent;
 }
 
+// Валидация
+
+//
+const showInputError = (formElement, inputElement, errorMessage) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.add('edit-form__field_type_error');
+    errorElement.textContent = errorMessage;
+    errorElement.classList.add('edit-form__input-error_active');
+};
+
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    inputElement.classList.remove('edit-form__field_type_error');
+    errorElement.classList.remove('edit-form__input-error_active');
+    errorElement.textContent = '';
+};
+
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add('pop-up__save_type_disabled');
+  } else {
+    buttonElement.classList.remove('pop-up__save_type_disabled');
+  }
+}
+
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  })
+};
+
+const checkInputValidity = (formElement, inputElement) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+const setEventListeners = (formElement) => {
+  const inputList = Array.from(formElement.querySelectorAll('.edit-form__field')); // проверь поля потом
+  const buttonElement = formElement.querySelector('.pop-up__save');
+    toggleButtonState(inputList, buttonElement);
+    inputList.forEach((inputElement) => {
+      inputElement.addEventListener('input', function () {
+        checkInputValidity(formElement, inputElement);
+        toggleButtonState(inputList, buttonElement);
+      });
+    });
+};
+
+const enableValidation = () => {
+  const formList = Array.from(document.querySelectorAll('.edit-form'));
+    formList.forEach((formElement) => {
+      formElement.addEventListener('submit', (evt) => {
+         evt.preventDefault();
+         });
+      setEventListeners(formElement);
+    });
+}
+
+enableValidation();

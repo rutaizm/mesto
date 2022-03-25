@@ -1,6 +1,4 @@
 .pop-up__container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
+    position: fixed;
+    top: 19%;
 }
