@@ -54,37 +54,31 @@ const initialCards = [
   ];
   
 // редактирование формы о себе
-editProfile.addEventListener('click', () => {
-  openPopup (profilePopup);
-  nameInput.value = names.textContent;
-  jobInput.value = job.textContent;
-});
-
 function openPopup (data) {
   data.classList.add('pop-up_opened');
   document.addEventListener('mousedown', closeOverlayClick);
   document.addEventListener('keydown', closeEscPress);
 }
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
+editProfile.addEventListener('click', () => {
+  openPopup (profilePopup);
+  nameInput.value = names.textContent;
+  jobInput.value = job.textContent;
+});
 
-    const nameInputValue = nameInput.value;
-    const jobInputValue = jobInput.value;
-
-    names.textContent = nameInputValue;
-    job.textContent = jobInputValue; 
-
-    closePopup(profilePopup);
-}  
-
-formProfilePopup.addEventListener('submit', formSubmitHandler);
+photoPopupAddBtn.addEventListener('click', () => {
+  openPopup(photoPopup);
+  photoPopupForm.reset();
+});
 
 function closePopup (data) {
   data.classList.remove('pop-up_opened');
   document.removeEventListener('mousedown', closeOverlayClick);
   document.removeEventListener('keydown', closeEscPress);
 }
+
+profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
+addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
 
 const closeOverlayClick = (evt) => {
   evt.preventDefault();
@@ -102,25 +96,45 @@ const closeEscPress = (evt) => {
   };
 };
 
-profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
+formProfilePopup.addEventListener('submit', formSubmitHandler);
 
-photoPopupAddBtn.addEventListener('click', () => {
-    openPopup(photoPopup);
-    photoPopupForm.reset();
-});
+function formSubmitHandler (evt) {
+    evt.preventDefault();
 
-addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
+    const nameInputValue = nameInput.value;
+    const jobInputValue = jobInput.value;
+
+    names.textContent = nameInputValue;
+    job.textContent = jobInputValue; 
+
+    closePopup(profilePopup);
+}
 
 function showBigPhoto(image, title) {
-    openPopup(bigPhotoPopup);  
-    popupImage.src = image.src;
-    popupImageText.textContent = title.textContent;
-    popupImage.alt = title.textContent;
+  openPopup(bigPhotoPopup);  
+  popupImage.src = image.src;
+  popupImageText.textContent = title.textContent;
+  popupImage.alt = title.textContent;
 }
+
+
 
 // попап с картинкой
 popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
 popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
+
+
+
+
+
+
+
+
+
+  
+
+
+
  
 // распределить исходный массив
 function renderPhoto () {
