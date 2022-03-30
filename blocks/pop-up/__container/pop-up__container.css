@@ -2,3 +2,9 @@
     position: fixed;
     top: 16%;
 }
+
+@media screen and (min-width:320px) and (max-width:580px) {
+    .pop-up__container {
+       top: 13.5%;
+    }
+}
