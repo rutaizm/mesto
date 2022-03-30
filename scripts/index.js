@@ -62,6 +62,8 @@ editProfile.addEventListener('click', () => {
 photoPopupAddBtn.addEventListener('click', () => {
     openPopup(photoPopup);
     photoPopupForm.reset();
+    photoPopupSaveBtn.setAttribute('disabled', true);
+    photoPopupSaveBtn.classList.add('pop-up__save_type_disabled');
 });
 
 // попап с картинкой
