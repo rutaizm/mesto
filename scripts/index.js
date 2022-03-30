@@ -54,14 +54,16 @@ const initialCards = [
   ];
   
 editProfile.addEventListener('click', () => {
-    openPopup (profilePopup);
     nameInput.value = names.textContent;
     jobInput.value = job.textContent;
+    openPopup (profilePopup);
 }); 
 
 photoPopupAddBtn.addEventListener('click', () => {
     openPopup(photoPopup);
     photoPopupForm.reset();
+    photoPopupSaveBtn.setAttribute('disabled', true);
+    photoPopupSaveBtn.classList.add('pop-up__save_type_disabled');
 });
 
 // попап с картинкой
@@ -69,11 +71,10 @@ popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
 popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
 
 function showBigPhoto(image, title) {
-    openPopup(bigPhotoPopup);
-  
     popupImage.src = image.src;
     popupImageText.textContent = title.textContent;
     popupImage.alt = title.textContent;
+    openPopup(bigPhotoPopup);
 }
 
 function openPopup (data) {

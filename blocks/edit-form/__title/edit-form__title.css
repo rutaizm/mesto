@@ -4,13 +4,19 @@
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
-    margin: 34px 64px 0 36px;
+    margin: 34px 64px 50px 36px;
 }
 
 @media screen and (min-width:320px) and (max-width:580px) {
     .edit-form__title {
         font-size: 18px;
         line-height: 22px;
-        margin: 25px 22px 22px 22px;
+        margin: 25px 22px 74px 22px;
     }
+    @-moz-document url-prefix() {
+        .edit-form__title {
+            margin: 25px 22px 50px 22px;;
+        }
+      }
 }
+

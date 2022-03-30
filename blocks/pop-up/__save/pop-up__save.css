@@ -10,8 +10,7 @@
     font-size: 18px;
     line-height: 22px;
     align-self: center;
-    margin-bottom: 36px;
-    margin-top: 48px;
+    margin-top: 5px;
     border-radius: 2px;
     border: none;
     transition: opacity 0.4s ease-out;
@@ -21,8 +20,6 @@
     .pop-up__save {
         width: 238px;
         min-height: 46px;
-        margin-bottom: 25px;
-        margin-top: 45px;
         font-size: 14px;
         line-height: 17px;
     }
