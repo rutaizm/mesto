@@ -53,13 +53,6 @@ const initialCards = [
     }
   ];
   
-// поп-апы открыли
-function openPopup (data) {
-  data.classList.add('pop-up_opened');
-  document.addEventListener('mousedown', closeOverlayClick);
-  document.addEventListener('keydown', closeEscPress);
-}
-
 editProfile.addEventListener('click', () => {
     openPopup (profilePopup);
     nameInput.value = names.textContent;
@@ -71,27 +64,46 @@ photoPopupAddBtn.addEventListener('click', () => {
     photoPopupForm.reset();
 });
 
-// поп-апы закрыли
+// попап с картинкой
+popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
+popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
+
+function showBigPhoto(image, title) {
+    openPopup(bigPhotoPopup);
+  
+    popupImage.src = image.src;
+    popupImageText.textContent = title.textContent;
+    popupImage.alt = title.textContent;
+}
+
+function openPopup (data) {
+  data.classList.add('pop-up_opened');
+  document.addEventListener('mousedown', closeOverlayClick);
+  document.addEventListener('keydown', closeEscPress);
+}
+
 function closePopup (data) {
     data.classList.remove('pop-up_opened');
+    document.removeEventListener('mousedown', closeOverlayClick);
+    document.removeEventListener('keydown', closeEscPress);
 }
+
 profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
 
 const closeOverlayClick = (evt) => {
-  const popupOpen = document.querySelector('.pop-up_opened');
-    if(evt.target === popupOpen){        
-      closePopup(popupOpen);
-    };
+  if(evt.target.classList.contains('pop-up') || evt.target.classList.contains('pop-up__close')){   
+    const popupOpen = document.querySelector('.pop-up_opened');     
+    closePopup(popupOpen);
+  };
 }
 
 const closeEscPress = (evt) => {
-  const popupOpen = document.querySelector('.pop-up_opened');
-    if (evt.key === 'Escape' && popupOpen !== null) {
-      closePopup(popupOpen);
-    };
+  if (evt.key === 'Escape') {
+    const popupOpen = document.querySelector('.pop-up_opened');
+    closePopup(popupOpen);
+  };
 }
-
 
 // редактирование формы о себе
 formProfilePopup.addEventListener('submit', formSubmitHandler);
@@ -158,14 +170,3 @@ function addCard (event) {
 
 renderPhoto();
 
-// попап с картинкой
-popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
-popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
-
-function showBigPhoto(image, title) {
-    openPopup(bigPhotoPopup);
-  
-    popupImage.src = image.src;
-    popupImageText.textContent = title.textContent;
-    popupImage.alt = title.textContent;
-}
