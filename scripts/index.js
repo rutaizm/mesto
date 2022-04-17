@@ -78,10 +78,8 @@ editProfile.addEventListener('click', () => {
 }); 
 
 photoPopupAddBtn.addEventListener('click', () => {
-  photoFormValidation.resetFormValidation();
   photoPopupForm.reset();
-  photoPopupSaveBtn.setAttribute('disabled', true);
-  photoPopupSaveBtn.classList.add('pop-up__save_type_disabled');
+  photoFormValidation.resetFormValidation();
   openPopup(photoPopup);
 });
 
