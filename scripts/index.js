@@ -1,3 +1,6 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./validation.js";
+
 // переменные
 const profilePopup = document.querySelector('.popup-edit');
 const editProfile = document.querySelector('.profile__edit-button');
@@ -6,7 +9,6 @@ const nameInput = formProfilePopup.querySelector('.edit-form__field_type_name');
 const jobInput = formProfilePopup.querySelector('.edit-form__field_type_info');
 const names = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__info');
-const profilePopupSaveBtn = document.querySelector('.popup-edit__save-button');
 const profilePopupCloseBtn = document.querySelector('.popup-edit__close-button');
 
 const photoPopup = document.querySelector('.popup-photo'); 
@@ -19,12 +21,12 @@ const photoPopupSaveBtn = document.querySelector('.popup-photo__save-button');
 const photoList = document.querySelector('.elements__photoes');
 
 const bigPhotoPopup = document.querySelector('.image-popup');
-const imageText = document.querySelector('.element__title');
-const imagePhoto = document.querySelector('.element__image');
-const popupPhoto = document.querySelector('.image-popup');
 const popupImage = document.querySelector('.image-popup__item');
 const popupImageText = document.querySelector('.image-popup__caption');
 const popupClose = document.querySelector('.image-popup__close-button');
+
+const profileForm = document.querySelector('.edit-form[name=profileEditForm]');
+const photoForm =document.querySelector('.edit-form[name=addPhotoForm]');
 
 const initialCards = [
     {
@@ -53,30 +55,44 @@ const initialCards = [
     }
   ];
   
+const config = {
+  formSelector: '.edit-form',
+  inputSelector: '.edit-form__field',
+  submitButtonSelector: '.pop-up__save',
+  inactiveButtonClass: 'pop-up__save_type_disabled',
+  inputErrorClass: 'edit-form__field_type_error',
+  errorClass: 'edit-form__input-error_active',
+ }
+
+// валидация форм 
+const profileFormValidation = new FormValidator (config, profileForm);
+const photoFormValidation = new FormValidator (config, photoForm);
+profileFormValidation.enableValidation();
+photoFormValidation.enableValidation();
+
 editProfile.addEventListener('click', () => {
   nameInput.value = names.textContent;
   jobInput.value = job.textContent;
+  profileFormValidation.resetFormValidation();
   openPopup (profilePopup);
 }); 
 
 photoPopupAddBtn.addEventListener('click', () => {
-  openPopup(photoPopup);
+  photoFormValidation.resetFormValidation();
   photoPopupForm.reset();
   photoPopupSaveBtn.setAttribute('disabled', true);
   photoPopupSaveBtn.classList.add('pop-up__save_type_disabled');
+  openPopup(photoPopup);
 });
 
-// попап с картинкой
-popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
-popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
-
-function showBigPhoto(image, title) {
-  popupImage.src = image.src;
-  popupImageText.textContent = title.textContent;
-  popupImage.alt = title.textContent;
+function showBigPhoto() {
+  popupImage.src = this._src;
+  popupImageText.textContent = this._name;
+  popupImage.alt = this._name;
   openPopup(bigPhotoPopup);
 }
 
+// открытие и закрытие 
 function openPopup (data) {
   data.classList.add('pop-up_opened');
   document.addEventListener('mousedown', closeOverlayClick);
@@ -88,9 +104,6 @@ function closePopup (data) {
   document.removeEventListener('mousedown', closeOverlayClick);
   document.removeEventListener('keydown', closeEscPress);
 }
-
-profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
-addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
 
 const closeOverlayClick = (evt) => {
   if(evt.target.classList.contains('pop-up') || evt.target.classList.contains('pop-up__close')){   
@@ -106,9 +119,6 @@ const closeEscPress = (evt) => {
   };
 }
 
-// редактирование формы о себе
-formProfilePopup.addEventListener('submit', formSubmitHandler);
-
 function formSubmitHandler (evt) {
   evt.preventDefault();
 
@@ -121,52 +131,26 @@ function formSubmitHandler (evt) {
   closePopup(profilePopup);
 }
  
-// распределить исходный массив
-function renderPhoto () {
-  const photoInfo = initialCards.map (createCard);
-  photoList.append(...photoInfo);
-} 
+initialCards.forEach((item) => {
+  const card = new Card (item, '.photo-template', showBigPhoto);
+  const cardElement = card.generateCard();
 
-// создать карточку
-const photoTemplate = document.querySelector('.photo-template').content;
-function createCard (card) {
-    
-  const newCard = photoTemplate.querySelector('.element').cloneNode(true);
-
-  const newCardTitle = newCard.querySelector('.element__title');
-  const newCardImage = newCard.querySelector('.element__image');
-      
-  newCardTitle.textContent = card.name;
-  newCardImage.src = card.link;
-  newCardImage.alt = card.name;
-
-  newCard.querySelector('.element__like-button').addEventListener('click', function(event){
-      event.target.classList.toggle('element__like-button_active');
-  })
-
-  const deleteButton = newCard.querySelector('.element__delete-button');
-  deleteButton.addEventListener('click', function(event) {
-      photoList.removeChild(event.target.closest('.element'));
-  });
-
-  newCardImage.addEventListener('click', () => showBigPhoto(newCardImage, newCardTitle));
-
-  return newCard;
-}    
-
-// добавить карточку
-photoPopupForm.addEventListener ('submit', addCard);
+  photoList.append(cardElement);
+})
 
 function addCard (event) {
   event.preventDefault();
-   
-  const newCardsTitle = placeInput.value;
-  const newCardsImage = linkInput.value;
-
-  const newCards = createCard({ name: newCardsTitle, link: newCardsImage });
-  photoList.prepend(newCards);
+  const newCard = new Card({name:placeInput.value, link: linkInput.value},'.photo-template', showBigPhoto);
+  const newCardElement = newCard.generateCard();
+  photoList.prepend(newCardElement);
 
   closePopup(photoPopup);
 }
 
-renderPhoto();
+// слушатели
+popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
+popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
+profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
+addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
+formProfilePopup.addEventListener('submit', formSubmitHandler);
+photoPopupForm.addEventListener ('submit', addCard);
