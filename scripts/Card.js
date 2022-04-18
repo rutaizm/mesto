@@ -8,45 +8,46 @@ export class Card {
     }
   
     _getTemplate() {
-      const cardElement = document
-        .querySelector(this._cardSelector)
-        .content
-        .querySelector('.element')
-        .cloneNode(true);
-  
+      const cardTempl = document.querySelector(this._cardSelector).content;
+      const cardElement =  cardTempl.querySelector('.element').cloneNode(true);
       return cardElement;  
     }
   
     generateCard() {
-      this._element = this._getTemplate();
+      this._element = this._getTemplate();       
+      this._image = this._element.querySelector('.element__image');
+      this._image.src = this._src;
+      this._image.alt = this._alt;
+      this._title = this._element.querySelector('.element__title');
+      this._title.textContent = this._name;
+      this._likeButton = this._element.querySelector('.element__like-button');
+      this._deleteButton = this._element.querySelector('.element__delete-button');
+
       this._setEventListeners();
-  
-      this._element.querySelector('.element__image').src = this._src;
-      this._element.querySelector('.element__image').alt = this._alt;
-      this._element.querySelector('.element__title').textContent = this._name;
-  
       return this._element;
+    }
+
+    _handleLike() {
+      this._likeButton.classList.toggle('element__like-button_active');
+      console.log (this._likeButton);
+      }
+    
+    _deleteCard() {
+      this._element.remove();
+      this._element = null;
     }
   
     _setEventListeners() {
-      this._element.querySelector('.element__like-button').addEventListener('click', () => {
-          this._handleLike();
+      this._likeButton.addEventListener('click', () => {
+        this._handleLike();
       });
-      this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-          this._deleteCard();
+      
+      this._deleteButton.addEventListener('click', () => {
+        this._deleteCard();
       });
-      this._element.querySelector('.element__image').addEventListener('click', () => {
+
+      this._image.addEventListener('click', () => {
           this._showBigPhoto();
       });
     }  
-  
-   _handleLike() {
-      this._element.querySelector('.element__like-button')
-        .classList.toggle('element__like-button_active');
-    }
-  
-    _deleteCard() {
-        document.querySelector('.elements__photoes').removeChild(this._element.closest('.element'));
-    }
-
 }

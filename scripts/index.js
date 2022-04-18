@@ -7,7 +7,7 @@ const editProfile = document.querySelector('.profile__edit-button');
 const formProfilePopup = document.querySelector('.edit-form');
 const nameInput = formProfilePopup.querySelector('.edit-form__field_type_name');
 const jobInput = formProfilePopup.querySelector('.edit-form__field_type_info');
-const names = document.querySelector('.profile__name');
+const name = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__info');
 const profilePopupCloseBtn = document.querySelector('.popup-edit__close-button');
 
@@ -71,7 +71,7 @@ profileFormValidation.enableValidation();
 photoFormValidation.enableValidation();
 
 editProfile.addEventListener('click', () => {
-  nameInput.value = names.textContent;
+  nameInput.value = name.textContent;
   jobInput.value = job.textContent;
   profileFormValidation.resetFormValidation();
   openPopup (profilePopup);
@@ -117,30 +117,32 @@ const closeEscPress = (evt) => {
   };
 }
 
-function formSubmitHandler (evt) {
+function submitProfileForm (evt) {
   evt.preventDefault();
 
   const nameInputValue = nameInput.value;
   const jobInputValue = jobInput.value;
 
-  names.textContent = nameInputValue;
+  name.textContent = nameInputValue;
   job.textContent = jobInputValue; 
 
   closePopup(profilePopup);
 }
- 
-initialCards.forEach((item) => {
-  const card = new Card (item, '.photo-template', showBigPhoto);
-  const cardElement = card.generateCard();
 
+function createCard (data, cardSelector, showBigPhoto) {
+  const card = new Card (data, cardSelector, showBigPhoto);
+  return card.generateCard();
+}
+
+initialCards.forEach((item) => {
+  const cardElement = createCard (item, '.photo-template', showBigPhoto);
   photoList.append(cardElement);
 })
 
 function addCard (event) {
   event.preventDefault();
-  const newCard = new Card({name:placeInput.value, link: linkInput.value},'.photo-template', showBigPhoto);
-  const newCardElement = newCard.generateCard();
-  photoList.prepend(newCardElement);
+  const newCard = createCard ({name:placeInput.value, link: linkInput.value},'.photo-template', showBigPhoto);
+  photoList.prepend(newCard);
 
   closePopup(photoPopup);
 }
@@ -150,5 +152,5 @@ popupImage.addEventListener('click', () => openPopup(bigPhotoPopup));
 popupClose.addEventListener('click', () =>  closePopup(bigPhotoPopup));
 profilePopupCloseBtn.addEventListener('click', () => closePopup(profilePopup));
 addPhotoCloseBtn.addEventListener('click', () => closePopup(photoPopup));
-formProfilePopup.addEventListener('submit', formSubmitHandler);
+formProfilePopup.addEventListener('submit', submitProfileForm);
 photoPopupForm.addEventListener ('submit', addCard);

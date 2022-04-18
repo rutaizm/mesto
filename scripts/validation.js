@@ -2,6 +2,7 @@ export class FormValidator {
   constructor (config, formElement) {
     this._config = config;
     this._formElement = formElement;
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
   }
 
   _showInputError(inputElement, errorMessage) {
@@ -19,17 +20,16 @@ export class FormValidator {
   };
 
   _toggleButtonState() {
-  if (this._hasInvalidInput()) {
-    this._buttonElement.classList.add(this._config.inactiveButtonClass);
-    this._buttonElement.disabled = true;
-  } else {
-    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
-    this._buttonElement.disabled = false;
-  }
+    if (this._hasInvalidInput()) {
+      this._buttonElement.classList.add(this._config.inactiveButtonClass);
+      this._buttonElement.disabled = true;
+    } else {
+      this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+      this._buttonElement.disabled = false;
+    }
   }
   
-  resetFormValidation() {
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));  
+  resetFormValidation() {    
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
     }); 
