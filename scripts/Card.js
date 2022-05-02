@@ -1,10 +1,10 @@
 export class Card {
-    constructor (data, cardSelector, showBigPhoto) {
+    constructor (data, cardSelector, handleCardClick) {
       this._name = data.name;
       this._src = data.link;
       this._alt = data.name;
       this._cardSelector = cardSelector;
-      this._showBigPhoto = showBigPhoto;
+      this.handleCardClick = handleCardClick;
     }
   
     _getTemplate() {
@@ -50,7 +50,7 @@ export class Card {
       });
 
       this._image.addEventListener('click', () => {
-          this._showBigPhoto();
+          this.handleCardClick(this._src, this._name, this._alt);
       });
     }  
 }
