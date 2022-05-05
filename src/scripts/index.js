@@ -1,15 +1,13 @@
-import { Card } from "../scripts/Card.js";
-import { FormValidator } from "../scripts/validation.js";
-import { Section } from "../scripts/section.js";
-import { Popup } from "../scripts/Popup.js";
-import { PopupWithForm } from "../scripts/PopupWithForm.js";
-import { PopupWithImage } from "../scripts/PopupWithImage.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./validation.js";
+import { Section } from "./section.js";
+import { Popup } from "./Popup.js";
+import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithImage } from "./PopupWithImage.js";
 import { initialCards, config, profileForm, photoForm,
   buttonProfile, formProfilePopup, nameInput, jobInput, name, job,
-  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../scripts/utils.js";
-import { UserInfo } from "../scripts/UserInfo.js";
-
-import '../pages/index.css';
+  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "./utils.js";
+import { UserInfo } from "./UserInfo.js";
 
 const userInfo = new UserInfo(name, job);
 
