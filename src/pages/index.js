@@ -9,6 +9,8 @@ import { initialCards, config, profileForm, photoForm,
   buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../scripts/utils.js";
 import { UserInfo } from "../scripts/UserInfo.js";
 
+import "../pages/index.css"
+
 const userInfo = new UserInfo(name, job);
 
 // сабмиты
