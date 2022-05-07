@@ -6,7 +6,7 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { initialCards, config, profileForm, photoForm,
   buttonProfile, formProfilePopup, nameInput, jobInput, name, job,
-  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../components/utils.js";
+  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../utils/constants.js";
 import { UserInfo } from "../components/UserInfo.js";
 
 import "../pages/index.css"
