@@ -2,7 +2,7 @@ export class Card {
     constructor (data, cardSelector, handleCardClick) {
       this._place = data.place;
       this._src = data.link;
-      this._alt = data.name;
+      this._alt = data.place;
       this._cardSelector = cardSelector;
       this.handleCardClick = handleCardClick;
     }
