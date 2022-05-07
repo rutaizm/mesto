@@ -2,27 +2,27 @@
 
 export const initialCards = [
     {
-      name: 'Архыз',
+      place: 'Архыз',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
     },
     {
-      name: 'Челябинская область',
+      place: 'Челябинская область',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
     },
     {
-      name: 'Иваново',
+      place: 'Иваново',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
     },
     {
-      name: 'Камчатка',
+      place: 'Камчатка',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
     },
     {
-      name: 'Холмогорский район',
+      place: 'Холмогорский район',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
     },
     {
-      name: 'Байкал',
+      place: 'Байкал',
       link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
     }
   ];
@@ -50,4 +50,4 @@ export const buttonAddPhoto = document.querySelector('.profile__add-photo-button
 export const photoPopupForm = document.querySelector('.edit-form_type_photo');
 export const placeInput = document.querySelector('.edit-form__field_type_place');
 export const linkInput = document.querySelector('.edit-form__field_type_link');
-// export const photoList = document.querySelector('.elements__photoes');
+export const photoList = document.querySelector('.elements__photoes');

@@ -1,8 +1,8 @@
 export class Card {
     constructor (data, cardSelector, handleCardClick) {
-      this._name = data.name;
+      this._place = data.place;
       this._src = data.link;
-      this._alt = data.name;
+      this._alt = data.place;
       this._cardSelector = cardSelector;
       this.handleCardClick = handleCardClick;
     }
@@ -22,7 +22,7 @@ export class Card {
       this._image.src = this._src;
       this._image.alt = this._alt;
       this._title = this._element.querySelector('.element__title');
-      this._title.textContent = this._name;
+      this._title.textContent = this._place;
       this._likeButton = this._element.querySelector('.element__like-button');
       this._deleteButton = this._element.querySelector('.element__delete-button');
 
@@ -50,7 +50,7 @@ export class Card {
       });
 
       this._image.addEventListener('click', () => {
-          this.handleCardClick(this._src, this._name, this._alt);
+          this.handleCardClick(this._src, this._place, this._alt);
       });
     }  
 }
