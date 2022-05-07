@@ -1,13 +1,13 @@
-import { Card } from "../scripts/Card.js";
-import { FormValidator } from "../scripts/validation.js";
-import { Section } from "../scripts/section.js";
-import { Popup } from "../scripts/Popup.js";
-import { PopupWithForm } from "../scripts/PopupWithForm.js";
-import { PopupWithImage } from "../scripts/PopupWithImage.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { Popup } from "../components/Popup.js";
+import { PopupWithForm } from "../components/PopupWithForm.js";
+import { PopupWithImage } from "../components/PopupWithImage.js";
 import { initialCards, config, profileForm, photoForm,
   buttonProfile, formProfilePopup, nameInput, jobInput, name, job,
-  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../scripts/utils.js";
-import { UserInfo } from "../scripts/UserInfo.js";
+  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../components/utils.js";
+import { UserInfo } from "../components/UserInfo.js";
 
 import "../pages/index.css"
 
@@ -16,12 +16,12 @@ const userInfo = new UserInfo(name, job);
 // сабмиты
 function submitProfileForm (userInputs) {
   userInfo.setUserInfo(userInputs);
-  this.closePopup();
+  userInfoForm.closePopup();
 }
 
 function submitCard(userInputs) {
-  const newCard = createCard ({name:placeInput.value, link: linkInput.value},'.photo-template', handleCardClick);
-  photoList.prepend(newCard);
+  const newCard = createCard (userInputs,'.photo-template', handleCardClick);
+  defaultCards.prependItem(newCard);
   editPhotoForm.closePopup();
 }
 
@@ -29,6 +29,9 @@ function submitCard(userInputs) {
  const userInfoForm = new PopupWithForm('.popup-edit', submitProfileForm);
  const editPhotoForm = new PopupWithForm('.popup-photo', submitCard);
  const showBigPhoto = new PopupWithImage('.image-popup');
+ userInfoForm.setEventListeners();
+ editPhotoForm.setEventListeners();
+ showBigPhoto.setEventListeners();
 
 //валидация форм 
 const profileFormValidation = new FormValidator (config, profileForm);
@@ -36,18 +39,14 @@ const photoFormValidation = new FormValidator (config, photoForm);
 profileFormValidation.enableValidation();
 photoFormValidation.enableValidation();
 
-
 // слушатели
 buttonProfile.addEventListener('click', () => {
-  const userData = userInfo.getUserInfo();
-  nameInput.value =userData.name;
-  jobInput.value = userData.job; 
-  profileFormValidation.resetFormValidation();
+  userInfoForm.setInputValues(userInfo.getUserInfo()); 
+  profileFormValidation.resetFormValidation();   
   userInfoForm.openPopup();
 }); 
 
 buttonAddPhoto.addEventListener('click', () => {
-  photoPopupForm.reset();
   photoFormValidation.resetFormValidation();
   editPhotoForm.openPopup();
 });

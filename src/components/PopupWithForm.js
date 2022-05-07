@@ -6,12 +6,18 @@ export class PopupWithForm extends Popup {
         this._submitForm = submitForm;
         this._handleSubmitForm = this._handleSubmitForm.bind(this);
         this._form = this._popup.querySelector('.edit-form');
+        this._inputList = Array.from(this._form.querySelectorAll('.edit-form__field'));
+    }
+
+    setInputValues(data) {
+        this._inputList.forEach((input) => {
+        input.value = data[input.name];
+        });
     }
 
     _getInputValues() {
-        const inputList = Array.from(this._form.querySelectorAll('.edit-form__field'));
         const formValues = {};
-        inputList.forEach(input => {
+        this._inputList.forEach(input => {
             formValues[input.name] = input.value;
         });
         return formValues;

@@ -2,7 +2,6 @@ export class FormValidator {
   constructor (config, formElement) {
     this._config = config;
     this._formElement = formElement;
-    this._inputList = Array.from(this._formElement.querySelectorAll(this._config.inputSelector));
   }
 
   _showInputError(inputElement, errorMessage) {
