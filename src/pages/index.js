@@ -8,8 +8,30 @@ import { initialCards, config, profileForm, photoForm,
   buttonProfile, formProfilePopup, nameInput, jobInput, name, job,
   buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../utils/constants.js";
 import { UserInfo } from "../components/UserInfo.js";
-
+import { Api } from "../components/Api.js";
 import "../pages/index.css"
+
+const api = new Api({
+  url:'https://mesto.nomoreparties.co/v1/cohort-41/cards',
+  headers: {
+    authorization: "381dea00-c956-4a18-991b-777a11869f64",
+    "Content-Type":"application/json", 
+  }
+});
+
+const cards = api.getInitialCards();
+cards.then((data) => {
+  const defaultCards = new Section ({
+    items: data,
+    renderer: (item) => {
+      const cardElement = createCard (item, '.photo-template', handleCardClick);
+      defaultCards.addItem(cardElement);
+    }
+  },
+  '.elements__photoes');
+  
+  defaultCards.renderItems();
+});
 
 const userInfo = new UserInfo(name, job);
 
@@ -60,13 +82,3 @@ function createCard (data, cardSelector) {
   return card.generateCard();
 }
 
-const defaultCards = new Section ({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard (item, '.photo-template', handleCardClick);
-    defaultCards.addItem(cardElement);
-  }
-},
-'.elements__photoes');
-
-defaultCards.renderItems();
