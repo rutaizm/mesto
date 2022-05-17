@@ -30,8 +30,15 @@ export class Card {
       this._likeButton = this._element.querySelector('.element__like-button');
       this._deleteButton = this._element.querySelector('.element__delete-button');
 
+      this._loadDeleteButton();
       this._setEventListeners();
       return this._element;
+    }
+
+    _loadDeleteButton() {
+      if (!this._userId) {
+        this._deleteButton.remove();
+      }
     }
 
     _handleLike() {
@@ -44,11 +51,6 @@ export class Card {
                      this._element.remove());     
     }
 
-    _loadDeleteButton() {
-      if(this._cardUserId !== this._userId) 
-        this._deleteButton.remove();
-    }
-  
     _setEventListeners() {
       this._likeButton.addEventListener('click', () => {
         this._handleLike();
