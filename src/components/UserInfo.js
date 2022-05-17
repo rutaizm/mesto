@@ -4,18 +4,16 @@ export class UserInfo {
         this._userJob = userJob;
     }
 
-    getUserInfo() {
-        
+    getUserInfo() {        
         const userData = {
             name : this._userName.textContent,
-            job : this._userJob.textContent,
+            about : this._userJob.textContent,
         }
-
         return userData;
     }
 
     setUserInfo(userInputs) {
         this._userName.textContent = userInputs.name;
-        this._userJob.textContent = userInputs.job; 
+        this._userJob.textContent = userInputs.about; 
     }
 }
