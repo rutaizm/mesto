@@ -14,6 +14,7 @@
         <section class="profile">
             <div class="profile__container">
                 <img class="profile__avatar" src="<%=require('./images/kusto.jpg')%> " alt="Жак-Ив Кусто">
+                <button type="button" class="profile__avatar-button"></button>
                 <div class="profile__bio"> 
                     <div class="profile__text">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -71,13 +72,38 @@
             </figure>
         </div>
     </div>
+    <div class="pop-up confirmation-popup">
+        <div class= "pop-up__container confirmation-popup__container">
+            <form class="edit-form" name="confirmDeleteForm" novalidate>
+                <button class="pop-up__close" type="button"></button>
+                <h2 class="edit-form__title">Вы уверены?</h2>
+                <button class="pop-up__save" type="submit">Да</button>
+            </form>    
+        </div>
+    </div>
+    <div class="pop-up new-avatar-popup">
+        <div class="pop-up__container">
+            <form class="edit-form edit-form_new-avatar" name="addAvatarForm" novalidate>
+                <button class="pop-up__close" type="button"></button>
+                <h2 class="edit-form__title">Обновить аватар</h2>
+                <fieldset class="edit-form__area">
+                    <input type="url" id="avatar-input" name="avatar" placeholder="Ссылка на картинку" class="edit-form__field edit-form__field_type_link" required>
+                    <span class="edit-form__input-error place-input-error"></span>
+                </fieldset>
+                <button class="pop-up__save popup-photo__save-button" type="submit">Сохранить</button>
+            </form>
+        </div>
+    </div>
     <template class="photo-template">
         <li class="element">
             <img class="element__image" src="#" alt="">
             <button type="reset" class="element__delete-button"></button>
             <div class="element__item">
                 <p class="element__title">Архыз</p>
-                <button type="button" class="element__like-button"></button>
+                    <div class="element__like-container">
+                        <button type="button" class="element__like-button"></button>
+                        <span class="element__like-counter">1</span>
+                    </div>    
             </div>
         </li>
     </template>

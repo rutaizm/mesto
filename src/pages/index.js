@@ -6,10 +6,11 @@ import { PopupWithForm } from "../components/PopupWithForm.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { initialCards, config, profileForm, photoForm,
   buttonProfile, formProfilePopup, nameInput, jobInput, name, job,
-  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList } from "../utils/constants.js";
+  buttonAddPhoto, photoPopupForm, placeInput, linkInput, photoList} from "../utils/constants.js";
 import { UserInfo } from "../components/UserInfo.js";
 import { Api } from "../components/Api.js";
 import "../pages/index.css"
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 let userId;
 
@@ -60,8 +61,6 @@ function submitCard(userInputs) {
       const newCard = createCard (data,'.photo-template', handleCardClick, api, userId);
       defaultCards.prependItem(newCard);
       editPhotoForm.closePopup();
-      // console.log(userId);
-      // console.log(data._id);
   })
   .catch((err) => console.log("Ошибка"(err)));
 }
@@ -84,6 +83,13 @@ buttonAddPhoto.addEventListener('click', () => {
   editPhotoForm.openPopup();
 });
 
+// deleteButton.addEventListener('click', () => {
+//   confirmDelete.openPopup();
+// });
+
+// console.log (deleteButton);
+// console.log(buttonProfile);
+
 function handleCardClick(src, name, alt) {
   showBigPhoto.openPopup(src, name, alt);
 }
@@ -97,9 +103,11 @@ function createCard (data, cardSelector,handleCardClick, api, userId) {
 const userInfoForm = new PopupWithForm('.popup-edit', submitProfileForm);
 const editPhotoForm = new PopupWithForm('.popup-photo', submitCard);
 const showBigPhoto = new PopupWithImage('.image-popup');
+// const confirmDelete = new PopupWithConfirmation('.confirmation-popup',);
 userInfoForm.setEventListeners();
 editPhotoForm.setEventListeners();
 showBigPhoto.setEventListeners();
+// confirmDelete.setEventListeners();
 
 //валидация форм 
 const profileFormValidation = new FormValidator (config, profileForm);
