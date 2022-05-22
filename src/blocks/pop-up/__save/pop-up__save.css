@@ -11,6 +11,7 @@
     line-height: 22px;
     align-self: center;
     margin-top: 5px;
+    margin-bottom: 38px;
     border-radius: 2px;
     border: none;
     transition: opacity 0.4s ease-out;
@@ -22,6 +23,7 @@
         min-height: 46px;
         font-size: 14px;
         line-height: 17px;
+        margin-bottom: 25px;
     }
 }
 

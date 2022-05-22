@@ -1,33 +1,4 @@
-
-
-export const initialCards = [
-    {
-      place: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-      place: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-      place: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-      place: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-      place: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-      place: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-  ];
-  
-  export const config = {
+export const config = {
     formSelector: '.edit-form',
     inputSelector: '.edit-form__field',
     submitButtonSelector: '.pop-up__save',
@@ -51,3 +22,8 @@ export const photoPopupForm = document.querySelector('.edit-form_type_photo');
 export const placeInput = document.querySelector('.edit-form__field_type_place');
 export const linkInput = document.querySelector('.edit-form__field_type_link');
 export const photoList = document.querySelector('.elements__photoes');
+
+export const buttonAvatar = document.querySelector('.profile__avatar-button');
+export const avatarEditForm = document.querySelector('.edit-form[name=addAvatarForm]');
+
+export const avatar = document.querySelector('.profile__avatar');

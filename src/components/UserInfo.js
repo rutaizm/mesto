@@ -8,7 +8,7 @@ export class UserInfo {
         
         const userData = {
             name : this._userName.textContent,
-            job : this._userJob.textContent,
+            about : this._userJob.textContent,
         }
 
         return userData;
@@ -16,6 +16,6 @@ export class UserInfo {
 
     setUserInfo(userInputs) {
         this._userName.textContent = userInputs.name;
-        this._userJob.textContent = userInputs.job; 
+        this._userJob.textContent = userInputs.about; 
     }
 }
