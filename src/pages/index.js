@@ -13,6 +13,7 @@ import "../pages/index.css"
 import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 let userId = null;
+let tempCard = null;
 const userInfo = new UserInfo(name, job);
 
 function handleCardClick(src, name, alt) {
@@ -24,25 +25,22 @@ function createCard (data) {
     addLike: (data) => {
       api.addLike(data)
       .then((res) => { 
-        card.likeCount(res.likes.length);
+        card.countLikes(res.likes.length);
     })
       .catch((err) => console.log((err)));
     },
     deleteLike: (data) => {
       api.deleteLike(data)
         .then((res) => { 
-          card.likeCount(res.likes.length);
+          card.countLikes(res.likes.length);
     })
         .catch((err) => console.log((err)));
   }, 
-  deleteCard: (data) => {
-    api.deleteCard(data)
-      .then((res) =>{
-        card.deleteCard(res);
-      })
-      .catch((err) => console.log((err)));
-    }    
-});
+  handleDeleteIconClick: () => {
+      confirmForm.openPopup(card);
+      tempCard = card;
+  }
+})
   return card.generateCard();
 }
 
@@ -107,6 +105,15 @@ function submitAvatar(userInputs) {
     .catch((err) => console.log("Ошибка"(err)));
 }
 
+function submitConfirmForm(card) {  
+  api.deleteCard(card._id)
+  .then(() => {        
+    tempCard.deleteCard();
+    confirmForm.closePopup();
+  })
+  .catch((err) => console.log((err)));
+}    
+
 // слушатели
 buttonProfile.addEventListener('click', () => {
   userInfoForm.setInputValues(userInfo.getUserInfo());
@@ -129,10 +136,12 @@ const userInfoForm = new PopupWithForm('.popup-edit', submitProfileForm);
 const editPhotoForm = new PopupWithForm('.popup-photo', submitCard);
 const showBigPhoto = new PopupWithImage('.image-popup');
 const avatarForm = new PopupWithForm('.new-avatar-popup', submitAvatar);
+const confirmForm = new PopupWithConfirmation('.confirmation-popup', submitConfirmForm, tempCard);
 userInfoForm.setEventListeners();
 editPhotoForm.setEventListeners();
 showBigPhoto.setEventListeners();
 avatarForm.setEventListeners();
+confirmForm.setEventListeners();
 
 //валидация форм 
 const profileFormValidation = new FormValidator (config, profileForm);
