@@ -1,5 +1,6 @@
 export class Card {
     constructor (data, cardSelector, handleCardClick, userId, {addLike, deleteLike, deleteCard}) {
+      this._data = data;
       this._name = data.name;
       this._src = data.link;
       this._alt = data.name;
@@ -41,25 +42,30 @@ export class Card {
 
     _checkIfLiked() {
       if(this._likes.some ((user) => user._id === this._userId)) {
-        // this._likeButton.classList.add('element__like-button_active');
         this._handleLike();
       };
     }
 
-    _addLike() {
-        this._likeButton.classList.add('element__like-button_active');
-    }
+    // _addLike() {
+    //     this._likeButton.classList.add('element__like-button_active');
+    // }
 
-    _deleteLike() {
-        this._likeButton.classList.remove('element__like-button_active');
+    // _deleteLike() {
+    //     this._likeButton.classList.remove('element__like-button_active');
+    // }
+
+    likeCount(data) {
+      this._likeCounter.textContent = data;
     }
 
     _setEventListeners() {
       this._likeButton.addEventListener('click', () => {
         if (this._likeButton.classList.contains('element__like-button_active')) {
             this._deleteLike(this._id);
+            this._handleLike();
           } else { 
             this._addLike(this._id);
+            this._handleLike();
           }
       });
       
@@ -71,7 +77,7 @@ export class Card {
           this._handleCardClick(this._src, this._name, this._alt); 
       });
     } 
-    
+
     generateCard() {
       this._element = this._getTemplate();       
       this._image = this._element.querySelector('.element__image');
@@ -83,7 +89,7 @@ export class Card {
       this._deleteButton = this._element.querySelector('.element__delete-button');
       this._likeCounter = this._element.querySelector('.element__like-counter');
       
-      this._likeCounter.textContent = this._likes.length;
+      this.likeCount(this._likes.length);
       this._checkIfLiked();
       this._loadDeleteButton();
       this._setEventListeners();

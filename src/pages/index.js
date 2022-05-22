@@ -15,19 +15,23 @@ import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 let userId = null;
 const userInfo = new UserInfo(name, job);
 
+function handleCardClick(src, name, alt) {
+  showBigPhoto.openPopup(src, name, alt);  
+}
+
 function createCard (data) {
   const card = new Card (data,'.photo-template', handleCardClick, userId, {
     addLike: (data) => {
       api.addLike(data)
       .then((res) => { 
-        card(res.likes.length);
+        card.likeCount(res.likes.length);
     })
       .catch((err) => console.log((err)));
     },
     deleteLike: (data) => {
       api.deleteLike(data)
         .then((res) => { 
-          card(res.likes.length);
+          card.likeCount(res.likes.length);
     })
         .catch((err) => console.log((err)));
   }, 
@@ -119,10 +123,6 @@ buttonAvatar.addEventListener('click', () => {
   avatarFormValidation.resetFormValidation();
   avatarForm.openPopup();
 });
-
-function handleCardClick(src, name, alt) {
-  showBigPhoto.openPopup(src, name, alt);  
-}
 
 //попапы
 const userInfoForm = new PopupWithForm('.popup-edit', submitProfileForm);
