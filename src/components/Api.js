@@ -50,4 +50,30 @@ export class Api {
         })
         .then(this._handleError); 
     }
+
+    addLike(_id) {
+        return fetch(`${this._url}/cards/${_id}/likes`, {
+            method: 'PUT',
+            headers: this._headers
+        })
+          .then(this._handleError);
+      }
+
+    deleteLike(_id) {
+        return fetch(`${this._url}/cards/${_id}/likes`, {
+            method: 'DELETE',
+            headers: this._headers
+        })
+          .then(this._handleError);
+    }
+
+    addAvatar(link) {
+        return fetch(`${this._url}/users/me/avatar`, {
+            method:"PATCH",
+            headers: this._headers,
+            body:JSON.stringify({avatar:link}),
+        })
+        .then(this._handleError); 
+    }
+
 }

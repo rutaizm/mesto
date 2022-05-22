@@ -22,3 +22,8 @@ export const photoPopupForm = document.querySelector('.edit-form_type_photo');
 export const placeInput = document.querySelector('.edit-form__field_type_place');
 export const linkInput = document.querySelector('.edit-form__field_type_link');
 export const photoList = document.querySelector('.elements__photoes');
+
+export const buttonAvatar = document.querySelector('.profile__avatar-button');
+export const avatarEditForm = document.querySelector('.edit-form[name=addAvatarForm]');
+
+export const avatar = document.querySelector('.profile__avatar');

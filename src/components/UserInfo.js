@@ -4,11 +4,13 @@ export class UserInfo {
         this._userJob = userJob;
     }
 
-    getUserInfo() {        
+    getUserInfo() {
+        
         const userData = {
             name : this._userName.textContent,
             about : this._userJob.textContent,
         }
+
         return userData;
     }
 
