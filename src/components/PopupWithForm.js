@@ -39,10 +39,13 @@ export class PopupWithForm extends Popup {
     closePopup() {
         super.closePopup();
         this._form.reset();
-        this._submitButtonSelector.textContent = this._buttonText;
     }
 
     showPreloader() {
         this._submitButtonSelector.textContent = "Сохранение...";
-      }
+    }
+
+    hidePreloader() {
+        this._submitButtonSelector.textContent = this._buttonText;
+    }  
 }

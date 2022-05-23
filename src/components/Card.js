@@ -30,7 +30,7 @@ export class Card {
       }
     }
 
-    _handleLike() {
+    handleLike() {
       this._likeButton.classList.toggle('element__like-button_active');
       }
     
@@ -41,7 +41,7 @@ export class Card {
 
     _checkIfLiked() {
       if(this._likes.some ((user) => user._id === this._userId)) {
-        this._handleLike();
+        this.handleLike();
       };
     }
 
@@ -53,10 +53,8 @@ export class Card {
       this._likeButton.addEventListener('click', () => {
         if (this._likeButton.classList.contains('element__like-button_active')) {
             this._deleteLike(this._id);
-            this._handleLike();
           } else { 
             this._addLike(this._id);
-            this._handleLike();
           }
       });
       

@@ -14,7 +14,7 @@ import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 let userId = null;
 let tempCard = null;
-const userInfo = new UserInfo(name, job);
+const userInfo = new UserInfo(name, job, avatar);
 
 function handleCardClick(src, name, alt) {
   showBigPhoto.openPopup(src, name, alt);  
@@ -25,6 +25,7 @@ function createCard (data) {
     addLike: (data) => {
       api.addLike(data)
       .then((res) => { 
+        card.handleLike();
         card.countLikes(res.likes.length);
     })
       .catch((err) => console.log((err)));
@@ -32,6 +33,7 @@ function createCard (data) {
     deleteLike: (data) => {
       api.deleteLike(data)
         .then((res) => { 
+          card.handleLike();
           card.countLikes(res.likes.length);
     })
         .catch((err) => console.log((err)));
@@ -44,6 +46,13 @@ function createCard (data) {
   return card.generateCard();
 }
 
+const defaultCards = new Section ({ 
+  renderer: (data) => {
+    const cardElement = createCard(data, userId);
+    defaultCards.addItem(cardElement);    
+  }
+}, '.elements__photoes');
+
 const api = new Api({
   url:'https://mesto.nomoreparties.co/v1/cohort-41/',
   headers: {
@@ -52,38 +61,29 @@ const api = new Api({
   }
 });
 
-api.getProfileInfo()
-  .then((res) => {
-    userInfo.getUserInfo(res.name, res.about, res._id);
-    userInfoForm.setInputValues(res.name, res.about);
-    userInfo.setUserInfo(res);
-    avatar.src = res.avatar;
-    userId = res._id;
-  })
-    .catch((err) => console.log(err));
-
-const defaultCards = new Section ({ 
-  renderer: (data) => {
-    const cardElement = createCard(data, userId);
-    defaultCards.addItem(cardElement);    
-  }
-}, '.elements__photoes');    
-
-api.getInitialCards()
-  .then((cards) => {
+Promise.all ([
+  api.getProfileInfo(), 
+  api.getInitialCards()
+])
+  .then(([info, cards]) => {
+    userInfoForm.setInputValues(info.name, info.about);
+    userInfo.setUserInfo(info);
+    userInfo.setUserAvatar(info);
+    userId = info._id;
     defaultCards.renderItems(cards)
   })
   .catch((err) => console.log(err));
-
-  
+    
 // сабмиты
 function submitProfileForm (userInputs) {
   api.editProfileInfo(userInputs.name, userInputs.about)
     .then((data) => {
+      userInfo.getUserInfo(data.name, data.about, data._id);
       userInfo.setUserInfo(data);
       userInfoForm.closePopup();
     }) 
-    .catch((err) => console.log(err));
+    .finally(() => userInfoForm.hidePreloader())
+    .catch((err) => console.log(err))
 }
 
 function submitCard(userInputs) {
@@ -93,15 +93,17 @@ function submitCard(userInputs) {
       defaultCards.prependItem(newCard);
       editPhotoForm.closePopup();
   })
+  .finally(() => editPhotoForm.hidePreloader())
   .catch((err) => console.log("Ошибка"(err)));
 }
 
 function submitAvatar(userInputs) {
   api.addAvatar(userInputs.avatar)
     .then((res)=> {
-      avatar.src = res.avatar;
+      userInfo.setUserAvatar(res);
       avatarForm.closePopup();
     })
+    .finally(() => avatarForm.hidePreloader())
     .catch((err) => console.log("Ошибка"(err)));
 }
 
